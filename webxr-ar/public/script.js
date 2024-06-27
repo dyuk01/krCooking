@@ -8,6 +8,8 @@ init();
 animate();
 
 function init() {
+  console.log("Initializing scene...");
+
   const container = document.createElement('div');
   document.body.appendChild(container);
 
@@ -39,6 +41,8 @@ function init() {
   scene.add(controller);
 
   window.addEventListener('resize', onWindowResize, false);
+
+  console.log("Scene initialized.");
 }
 
 function onWindowResize() {
