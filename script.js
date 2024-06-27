@@ -1,5 +1,5 @@
-import * as THREE from 'three';
-import { VRButton } from './VRButton.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.138.3/build/three.module.js';
+import { ARButton } from 'https://cdn.jsdelivr.net/npm/three@0.138.3/examples/jsm/webxr/ARButton.js';
 
 let camera, scene, renderer;
 let controller;
@@ -22,7 +22,7 @@ function init() {
   scene.add(light);
 
   const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
-  const material = new THREE.MeshPhongMaterial({color: 0x00ff00});
+  const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(0, 0, -0.5);
   scene.add(mesh);
@@ -33,7 +33,7 @@ function init() {
   renderer.xr.enabled = true;
   container.appendChild(renderer.domElement);
 
-  document.body.appendChild(VRButton.createButton(renderer));
+  document.body.appendChild(ARButton.createButton(renderer));
 
   controller = renderer.xr.getController(0);
   controller.addEventListener('selectstart', onSelectStart);
