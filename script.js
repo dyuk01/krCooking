@@ -3,6 +3,7 @@ import { ARButton } from 'https://cdn.jsdelivr.net/npm/three@0.138.3/examples/js
 
 let camera, scene, renderer;
 let controller;
+let model;
 
 init();
 animate();
@@ -31,6 +32,7 @@ function init() {
   const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
   light.position.set(0.5, 1, 0.25);
   scene.add(light);
+
 
   const modelUrl = 'https://raw.githubusercontent.com/immersive-web/webxr-samples/main/media/gltf/space/space.gltf';
 
