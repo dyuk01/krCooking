@@ -34,7 +34,7 @@ function init() {
 
   const modelUrl = 'https://raw.githubusercontent.com/immersive-web/webxr-samples/main/media/gltf/space/space.gltf';
 
-  // Initial green cube
+  // Load .glhf 3D Model
   loader = new THREE.GLTFLoader();
   loader.load(
     modelUrl,
