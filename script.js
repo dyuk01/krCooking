@@ -33,7 +33,24 @@ function init() {
   light.position.set(0.5, 1, 0.25);
   scene.add(light);
 
+  // Controller for AR interactions
+  controller = renderer.xr.getController(0);
+  controller.addEventListener('selectstart', onSelectStart);
+  scene.add(controller);
 
+  window.addEventListener('resize', onWindowResize, false);
+
+  console.log("Scene initialized.");
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function onSelectStart(event) {
+  // Create a green cube on interaction
   const modelUrl = 'https://raw.githubusercontent.com/immersive-web/webxr-samples/main/media/gltf/space/space.gltf';
 
   // Load .glhf 3D Model
@@ -53,31 +70,6 @@ function init() {
       console.error(error);
     }
   );
-
-  // Controller for AR interactions
-  controller = renderer.xr.getController(0);
-  controller.addEventListener('selectstart', onSelectStart);
-  scene.add(controller);
-
-  window.addEventListener('resize', onWindowResize, false);
-
-  console.log("Scene initialized.");
-}
-
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-function onSelectStart(event) {
-  // Create a green cube on interaction
-  const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
-  const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
-  cube.position.set(0, 0, -0.5).applyMatrix4(controller.matrixWorld);
-  cube.quaternion.setFromRotationMatrix(controller.matrixWorld);
-  scene.add(cube);
 }
 
 function animate() {
