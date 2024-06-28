@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>3D Model Animated</title>
+	<title>3D Animation Test</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<link type="text/css" rel="stylesheet" href="style.css">
@@ -12,10 +12,9 @@
 
 <body>
 	<script type="module">
-    import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
-    
-		let camera, scene, renderer;
-		let loader;
+    import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';   
+	let camera, scene, renderer;
+	let loader;
     let model;
 
 		init();
@@ -76,7 +75,7 @@
 		}
 
 		function render() {
-      rotateModel();
+      		rotateModel();
 			renderer.render(scene, camera);
 		}
     
