@@ -76,6 +76,8 @@
         model.visible = false;
       };
 
+      document.body.appendChild(ARButton.createButton(renderer));
+
       window.addEventListener('resize', onWindowResize, false);
       await mindarThree.start();
     }
