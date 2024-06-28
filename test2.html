@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Image Tracked AR Experience</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mind-ar-js@1.1.7/dist/mindar.css" />
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r138/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.138.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar-js@1.1.7/dist/mindar.js"></script>
+  <script type="module">
+    import { ARButton } from 'https://unpkg.com/three@0.138.0/examples/jsm/webxr/ARButton.js';
+    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.138.0/examples/jsm/loaders/GLTFLoader.js';
+
+    let camera, scene, renderer, mindarThree;
+    let model;
+
+    async function init() {
+      console.log("Initializing scene...");
+
+      // Create a MindAR instance
+      mindarThree = new window.MINDAR.Three({
+        container: document.body,
+        imageTargetSrc: 'path_to_your_image_target_file.mind' // Update this path
+      });
+
+      const { renderer: mindarRenderer, scene: mindarScene, camera: mindarCamera } = mindarThree;
+      scene = mindarScene;
+      camera = mindarCamera;
+      renderer = mindarRenderer;
+
+      // Add light to the scene
+      const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+      light.position.set(0.5, 1, 0.25);
+      scene.add(light);
+
+      // Create a simple cube as the 3D model
+      const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+      const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+      model = new THREE.Mesh(geometry, material);
+      model.visible = false; // Initially hide the model
+      scene.add(model);
+
+      // Set up the MindAR event listener for image target found
+      const mindarController = mindarThree.addAnchor(0);
+      mindarController.onTargetFound = () => {
+        console.log("Image target found");
+        model.visible = true;
+      };
+      mindarController.onTargetLost = () => {
+        console.log("Image target lost");
+        model.visible = false;
+      };
+
+      document.body.appendChild(ARButton.createButton(renderer));
+
+      window.addEventListener('resize', onWindowResize, false);
+      await mindarThree.start();
+    }
+
+    function onWindowResize() {
+      const { renderer } = mindarThree;
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate() {
+      renderer.setAnimationLoop(render);
+    }
+
+    function render() {
+      renderer.render(scene, camera);
+    }
+
+    init();
+    animate();
+  </script>
+</body>
+
+</html>
