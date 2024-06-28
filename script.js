@@ -42,7 +42,6 @@ function init() {
   // Controller for AR interactions
   controller = renderer.xr.getController(0);
   controller.addEventListener('selectstart', onSelectStart);
-  controller.addEventListener('selectend', onSelectEnd);
   scene.add(controller);
 
   window.addEventListener('resize', onWindowResize, false);
@@ -64,10 +63,6 @@ function onSelectStart(event) {
   cube.position.set(0, 0, -0.5).applyMatrix4(controller.matrixWorld);
   cube.quaternion.setFromRotationMatrix(controller.matrixWorld);
   scene.add(cube);
-}
-
-function onSelectEnd(event) {
-  // Optionally handle end of selection
 }
 
 function animate() {
