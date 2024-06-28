@@ -32,12 +32,25 @@ function init() {
   light.position.set(0.5, 1, 0.25);
   scene.add(light);
 
+  const modelUrl = 'https://raw.githubusercontent.com/immersive-web/webxr-samples/main/media/gltf/space/space.gltf';
+
   // Initial green cube
-  const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
-  const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-  const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(0, 0, -0.5);
-  scene.add(mesh);
+  loader = new THREE.GLTFLoader();
+  loader.load(
+    modelUrl,
+    function (gltf) {
+      model = gltf.scene;
+      model.position.z = -10;
+      scene.add(model);
+      console.log("Model added to scene");
+    },
+    function (xhr) {
+      // console.log((xhr.loaded / xhr.total * 100) + '% loaded' );
+    },
+    function (error) {
+      console.error(error);
+    }
+  );
 
   // Controller for AR interactions
   controller = renderer.xr.getController(0);
