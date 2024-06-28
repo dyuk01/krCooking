@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Image Tracked 3D Model</title>
+  <title>Image Tracked AR Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <link type="text/css" rel="stylesheet" href="style.css">
@@ -17,13 +17,8 @@
     import { ARButton } from 'https://cdn.jsdelivr.net/npm/three@0.138.0/examples/jsm/webxr/ARButton.js';
     import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.138.0/examples/jsm/loaders/GLTFLoader.js';
 
-    let camera, scene, renderer;
-    let loader;
+    let camera, scene, renderer, mindarThree;
     let model;
-    let mindarThree;
-
-    init();
-    animate();
 
     async function init() {
       console.log("Initializing scene...");
@@ -39,31 +34,17 @@
       camera = mindarCamera;
       renderer = mindarRenderer;
 
-      // Hemisphere light to simulate environment lighting
+      // Add light to the scene
       const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
       light.position.set(0.5, 1, 0.25);
       scene.add(light);
 
-      // Add a GLTF model to the scene
-      const modelUrl = 'https://raw.githubusercontent.com/immersive-web/webxr-samples/main/media/gltf/space/space.gltf';
-
-      loader = new GLTFLoader();
-      loader.load(
-        modelUrl,
-        function (gltf) {
-          model = gltf.scene;
-          model.position.set(0, 0, -10); // Adjust the position as needed
-          model.visible = false; // Initially hide the model
-          scene.add(model);
-          console.log("Model added to scene");
-        },
-        function (xhr) {
-          // console.log((xhr.loaded / xhr.total * 100) + '% loaded' );
-        },
-        function (error) {
-          console.error(error);
-        }
-      );
+      // Create a simple cube as the 3D model
+      const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+      const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+      model = new THREE.Mesh(geometry, material);
+      model.visible = false; // Initially hide the model
+      scene.add(model);
 
       // Set up the MindAR event listener for image target found
       const mindarController = mindarThree.addAnchor(0);
@@ -76,7 +57,8 @@
         model.visible = false;
       };
 
-      document.body.appendChild(ARButton.createButton(renderer));
+      // Add AR button to start AR session
+      document.body.appendChild(ARButton.createButton(renderer, { requiredFeatures: ['hit-test'] }));
 
       window.addEventListener('resize', onWindowResize, false);
       await mindarThree.start();
@@ -95,6 +77,8 @@
       renderer.render(scene, camera);
     }
 
+    init();
+    animate();
   </script>
 </body>
 
