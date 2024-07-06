@@ -7,7 +7,7 @@ const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    scene: [FarmScene, KitchenScene, SaltPondScene]
+    scene: [FarmScene]
 };
 
 const game = new Phaser.Game(config);
