@@ -15,7 +15,6 @@ class MainMenu extends Phaser.Scene {
 	/* START-USER-CODE */
 
 	// Write your code here
-
 	create() {
 		this.editorCreate();
 	}

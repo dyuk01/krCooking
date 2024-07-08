@@ -3,10 +3,10 @@
 
 /* START OF COMPILED CODE */
 
-class CucumberFarm extends Phaser.Scene {
+class main extends Phaser.Scene {
 
 	constructor() {
-		super("CucumberFarm");
+		super("main");
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.

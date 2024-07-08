@@ -1,5 +1,5 @@
 {
-  "id": "93504b28-1ffd-4310-b00e-8486a681f290",
+  "id": "d27921e5-cb4a-4c86-8fa2-3110bcc71e87",
   "settings": {
     "compilerOutputLanguage": "JAVA_SCRIPT",
     "javaScriptInitFieldsInConstructor": false,
@@ -12,7 +12,7 @@
     "borderHeight": 600,
     "borderX": 0,
     "borderY": 0,
-    "sceneKey": "CucumberFarm"
+    "sceneKey": "main"
   },
   "sceneType": "SCENE",
   "displayList": [],
