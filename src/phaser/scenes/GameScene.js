@@ -13,7 +13,7 @@ class GameScene extends Phaser.Scene {
         const tileset = map.addTilesetImage('tileset', 'tiles');
 
         // Create the layers (background, obstacles, etc.)
-        const backgroundLayer = map.createLayer('Background', tileset);
+        const backgroundLayer = map.createLayer('water', tileset);
         const obstaclesLayer = map.createLayer('Obstacles', tileset);
 
         // Set collision on the obstacles layer
