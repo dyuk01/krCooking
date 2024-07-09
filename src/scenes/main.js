@@ -15,7 +15,6 @@ class main extends Phaser.Scene {
 
 	/** @returns {void} */
 	editorCreate() {
-
 		this.events.emit("scene-awake");
 	}
 
@@ -24,7 +23,6 @@ class main extends Phaser.Scene {
 	// Write your code here
 
 	create() {
-
 		this.editorCreate();
 	}
 
