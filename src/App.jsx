@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import GameUI from '/src/components/GameUI';
-import './phaser';
+import GameUI from '.src/components/GameUI';
+import './index.css';
+import './phaser'; // Ensure this imports the Phaser game setup
 
 const App = () => {
     const [score, setScore] = useState(0);
